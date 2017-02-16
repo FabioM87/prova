@@ -1,0 +1,26 @@
+-Recuperare la definizione della matrice
+-Recuperare la configurazione delle relazioni
+-Costruire matrice delle configurazioni
+
+
+---List<sobject> MAIN => List<SOBJECT>
+	-Process(SOBJECT)
+		
+		-cicla sui gruppi di priorità
+		-per ogni gruppo costruisce la query se è presente il parent
+		-per ogni record recuperato ==> sobject transform(gruppo di record di matrice, oggetto source)
+
+		map< s_object, list<sobject>>
+
+
+Batch per recuperare i record da fornire in scope
+execute richiama metodo di conversione from to
+	1 MAIN --> 1.1 Recupera configurazioni matrice iniziale
+		   1.2 Recupera configurazioni matrice delle relazioni
+		   1.3 Costruisce object wrapper per mantenere tutte le informazioni di configurazione
+		   1.4 Ciclo sui gruppi di priorità
+		   1.5 Richiama funzione di processing
+			1.5.1  per ogni record in ingresso alla funzione check se esiste un parent source object
+				TRUE --> costruisce la query per prendere i record del child object
+					 richiama funzione di trasformazione per ogni record prelevato
+				FALSE --> richiama funzione di trasformazione sul record in input
